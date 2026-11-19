@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>NextGenCafe 🎙️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══ LOADER ══ -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">NGC</div>
+    <p>NextGenCafe is waking up…</p>
+    <div class="loader-dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- ══ ONBOARDING ══ -->
+<div class="overlay" id="onboardOverlay">
+  <div class="card onboard-card">
+    <div class="onboard-logo">🎙️</div>
+    <h2>NextGenCafe</h2>
+    <p class="sub">AI + Voice Ordering · Hindi & English</p>
+
+    <div class="field">
+      <label>Your Name / आपका नाम</label>
+      <input id="obName" type="text" placeholder="e.g. Priya, Rahul…"/>
+    </div>
+    <div class="field">
+      <label>Language / भाषा</label>
+      <div class="chip-row" id="langChips">
+        <button class="chip active" data-lang="en">🇬🇧 English</button>
+        <button class="chip" data-lang="hi">🇮🇳 हिंदी</button>
+        <button class="chip" data-lang="hinglish">🔀 Hinglish</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Weather / मौसम</label>
+      <div class="chip-row" id="weatherChips">
+        <button class="chip active" data-w="normal">🌤 Normal</button>
+        <button class="chip" data-w="hot">☀️ Hot</button>
+        <button class="chip" data-w="cold">❄️ Cold</button>
+        <button class="chip" data-w="rainy">🌧 Rainy</button>
+      </div>
+    </div>
+    <button class="btn-primary full" id="obStart">Enter Cafe ☕</button>
+  </div>
+</div>
+
+<!-- ══ HEADER ══ -->
+<header class="header">
+  <div class="header-in">
+    <div class="logo">🎙️ <span>NextGen</span>Cafe</div>
+    <nav class="tabs">
+      <button class="tab active" data-page="home">Home</button>
+      <button class="tab" data-page="menu">Menu</button>
+      <button class="tab" data-page="track">Track</button>
+    </nav>
+    <div class="hdr-right">
+      <span class="lang-badge" id="langBadge">🇬🇧 EN</span>
+      <span class="user-name" id="hdrName">Guest</span>
+      <button class="cart-btn" id="cartToggle">🛒 <span id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ══ PAGES ══ -->
+<main class="main">
+
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+
+    <!-- Voice UI -->
+    <div class="voice-section">
+      <div class="voice-hero">
+        <h1>Your AI Waiter<br/><span class="glow">speaks your language</span></h1>
+        <p class="voice-sub">Tap the mic and order in Hindi, English, or Hinglish</p>
+      </div>
+
+      <div class="voice-box">
+        <!-- Mic -->
+        <div class="mic-wrap">
+          <button class="mic-btn" id="micBtn" title="Tap to speak">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a4 4 0 0 1 4 4v7a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+          <div class="mic-rings" id="micRings">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- Transcript + Response -->
+        <div class="voice-transcript-wrap">
+          <div class="voice-transcript" id="voiceTranscript">
+            <span class="placeholder-text">👆 Tap mic and speak…<br/>
+            <small>Try: "Give me a masala chai" / "मुझे एक कैपुचीनो दो"</small></span>
+          </div>
+          <div class="waiter-response" id="waiterResponse">
+            <div class="waiter-avatar">🤖</div>
+            <div class="waiter-bubble" id="waiterBubble">Namaste! Main aapki madad karne ke liye ready hoon. ☕</div>
+          </div>
+        </div>
+
+        <!-- Quick voice commands -->
+        <div class="quick-cmds">
+          <p class="quick-label">Quick commands / जल्दी बोलें:</p>
+          <div class="cmd-chips">
+            <button class="cmd-chip" data-cmd="recommend something">🤖 Recommend</button>
+            <button class="cmd-chip" data-cmd="what's in my cart">🛒 Cart</button>
+            <button class="cmd-chip" data-cmd="show my bill">💰 Bill</button>
+            <button class="cmd-chip" data-cmd="place my order">✅ Order</button>
+            <button class="cmd-chip" data-cmd="मुझे मसाला चाय दो">🍵 चाय</button>
+            <button class="cmd-chip" data-cmd="कुछ recommend करो">🌟 सुझाव</button>
+            <button class="cmd-chip" data-cmd="मेरा bill बताओ">💰 बिल</button>
+            <button class="cmd-chip" data-cmd="order place करो">✅ ऑर्डर</button>
+          </div>
+        </div>
+
+        <!-- Language toggle -->
+        <div class="lang-toggle-row">
+          <span>Voice Language:</span>
+          <button class="lang-tog" data-lang="en" id="toggleEN">🇬🇧 English</button>
+          <button class="lang-tog" data-lang="hi" id="toggleHI">🇮🇳 हिंदी</button>
+        </div>
+      </div>
+
+      <!-- AI Picks -->
+      <div class="ai-recs-wrap">
+        <div class="sec-hdr">
+          <h2>🤖 AI Picks For You</h2>
+          <button class="btn-ghost-sm" id="refreshRecs">↻ Refresh</button>
+        </div>
+        <div class="recs-grid" id="recsGrid"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MENU -->
+  <section class="page" id="page-menu">
+    <h2 class="page-title">Our Menu</h2>
+    <div class="menu-controls">
+      <div class="search-box">
+        <span>🔍</span>
+        <input id="menuSearch" type="text" placeholder="Search / खोजें…"/>
+      </div>
+      <div class="filter-row" id="catFilters"></div>
+    </div>
+    <!-- Wait bar -->
+    <div class="wait-bar hidden" id="waitBar">
+      <span>⏱</span>
+      <span id="waitBarText">Calculating…</span>
+      <span class="wait-tip" id="waitBarTip"></span>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <!-- TRACK -->
+  <section class="page" id="page-track">
+    <div class="track-wrap">
+      <h2 class="page-title">Track Order / ऑर्डर ट्रैक</h2>
+      <div class="track-input-row">
+        <input id="trackId" type="text" placeholder="Enter Order ID e.g. NGC0001"/>
+        <button class="btn-primary" id="trackBtn">Track</button>
+      </div>
+
+      <div class="track-result hidden" id="trackResult">
+        <div class="track-card">
+          <div class="track-top">
+            <span class="track-oid" id="tOid"></span>
+            <span class="status-pill" id="tStatus"></span>
+          </div>
+          <div class="steps" id="trackSteps">
+            <div class="step" id="s-pending"><div class="dot"></div><div class="step-lbl">Placed</div></div>
+            <div class="step-line"></div>
+            <div class="step" id="s-preparing"><div class="dot"></div><div class="step-lbl">Preparing</div></div>
+            <div class="step-line"></div>
+            <div class="step" id="s-ready"><div class="dot"></div><div class="step-lbl">Ready ✓</div></div>
+          </div>
+          <!-- Bill summary -->
+          <div class="track-bill" id="trackBill"></div>
+          <div class="track-meta">
+            <div class="meta-row"><span>Customer</span><strong id="tName"></strong></div>
+            <div class="meta-row"><span>Est. Wait</span><strong id="tWait"></strong></div>
+            <div class="meta-row"><span>Remaining</span><strong id="tLeft"></strong></div>
+          </div>
+          <!-- Ring -->
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" class="ring-svg">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="50"/>
+            </svg>
+            <div class="ring-txt" id="ringTxt">— min</div>
+          </div>
+          <button class="btn-ghost-sm center" id="refreshTrack">↻ Refresh</button>
+        </div>
+      </div>
+
+      <div class="queue-panel">
+        <h3>🍳 Live Kitchen Queue</h3>
+        <div id="queueList"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ CART DRAWER ══ -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="cartDrawer">
+  <div class="drawer-hdr">
+    <h3>🛒 Your Order</h3>
+    <button class="close-x" id="cartClose">✕</button>
+  </div>
+  <div class="drawer-body" id="cartBody">
+    <div class="empty-cart">
+      <div>🧺</div><p>Cart is empty</p>
+      <button class="btn-ghost-sm" id="goMenuBtn">Browse Menu</button>
+    </div>
+  </div>
+  <div class="drawer-footer hidden" id="cartFooter">
+    <div class="wait-box" id="cartWaitBox">
+      <div class="wait-row"><span>⏱ Est. Wait</span><strong id="cwTime">—</strong></div>
+      <p class="wait-tip-txt" id="cwTip"></p>
+    </div>
+    <!-- Bill preview -->
+    <div class="bill-preview" id="billPreview"></div>
+    <button class="btn-secondary full" id="showBillBtn">🧾 View Full Bill</button>
+    <button class="btn-primary full" id="placeOrderBtn">✅ Place Order</button>
+  </div>
+</aside>
+
+<!-- ══ BILL MODAL ══ -->
+<div class="overlay hidden" id="billOverlay">
+  <div class="card bill-card">
+    <button class="close-x modal-close" data-target="billOverlay">✕</button>
+    <div class="bill-header">
+      <div class="bill-logo">🎙️ NextGenCafe</div>
+      <p class="bill-addr">Your AI Café · GST@5%</p>
+      <p class="bill-date" id="billDate"></p>
+    </div>
+    <div class="bill-items" id="billItems"></div>
+    <div class="bill-totals" id="billTotals"></div>
+    <div class="bill-footer-txt">Thank you! Aate rehna! 🙏</div>
+  </div>
+</div>
+
+<!-- ══ SUCCESS MODAL ══ -->
+<div class="overlay hidden" id="successOverlay">
+  <div class="card success-card">
+    <div class="success-anim">🎉</div>
+    <h3>Order Placed!</h3>
+    <p id="successMsg"></p>
+    <div class="success-box" id="successBox"></div>
+    <button class="btn-primary full" id="successTrack">📍 Track Order</button>
+    <button class="btn-ghost full" id="successClose">Continue</button>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
