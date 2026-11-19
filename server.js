@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
 
 /* ═══════════════════════════════════════
    DATA STORE
@@ -245,7 +245,7 @@ function advanceStatus(id, status) {
 
 // Serve SPA
 app.use((req,res) => {
-  res.sendFile(path.join(__dirname,"public","index.html"));
+  res.sendFile(path.join(__dirname,"index.html"));
 });
 
 app.listen(PORT, () => console.log(`\n🎙️  NextGenCafe live → http://localhost:${PORT}\n`));
